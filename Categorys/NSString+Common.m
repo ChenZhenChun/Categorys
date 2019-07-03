@@ -368,6 +368,8 @@
         return dateStr;
     }
     NSDateFormatter *dateFmt = [[NSDateFormatter alloc]init];
+    dateFmt.AMSymbol = @"上午";
+    dateFmt.PMSymbol = @"下午";
     dateFmt.dateFormat = formatStr;
     [dateFmt setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     dateFmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
