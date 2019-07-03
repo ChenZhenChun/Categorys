@@ -9,8 +9,6 @@
 #import "NSObject+GLHUD.h"
 #import "MBProgressHUD.h"
 #import <objc/runtime.h>
-#import "MacroDefinition.h"
-#import "NSString+Common.h"
 #define CustomViewHeight 105
 #define CustomViewWidth 84
 
@@ -152,9 +150,9 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 
 
         if (string &&string.length>0) {
-            UILabel *alertLable = [[UILabel alloc]initWithFrame:CGRectMake(-ScreenWidth/2+gifImageView.frame.size.width/2, gifImageView.frame.size.height-5, ScreenWidth, 30)];
+            UILabel *alertLable = [[UILabel alloc]initWithFrame:CGRectMake(-[UIScreen mainScreen].bounds.size.width/2+gifImageView.frame.size.width/2, gifImageView.frame.size.height-5, [UIScreen mainScreen].bounds.size.width, 30)];
             alertLable.font = [UIFont systemFontOfSize:12];
-            alertLable.textColor = rgb(146, 146, 146);
+            alertLable.textColor = [UIColor colorWithRed:146/255.0 green:146/255.0 blue:146/255.0 alpha:1];
             alertLable.numberOfLines = 0;
 
             alertLable.text = string;
@@ -168,7 +166,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 - (void)hud_showHintErrorByLocalizedString:(int)code {
 //    NSString *errorStr = NSLocalizedString(([NSString stringWithFormat:@"%d",(int)code]),nil);
     NSString *errorStr = NSLocalizedStringFromTable(([NSString stringWithFormat:@"%d",(int)code]),@"GLIMLocalizable", nil);
-    if (![NSString isBlankString:errorStr]) {
+    if (errorStr&&errorStr.length) {
         [self hud_showHintError:errorStr];
     }
 }

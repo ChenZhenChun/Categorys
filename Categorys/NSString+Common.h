@@ -60,12 +60,6 @@
 //获取url参数
 + (NSString *)Analysis:(NSString *)CS webaddress:(NSString *)webaddress;
 
-//获取中文首字母
-+ (NSString *)pinyinSpell:(NSString *)str;
-
-//获取中文全拼
-+ (NSString *)pinyinFullSpell:(NSString *)str;
-
 /**
  *  根据身份证获取性别，返回0是女，1是男
  *

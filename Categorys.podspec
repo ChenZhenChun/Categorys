@@ -18,6 +18,7 @@ s.platform          = :ios, '7.0'
 s.requires_arc = true
 
 #source_files路径是相对podspec文件的路径
+s.dependency 'MBProgressHUD'
 s.source_files = 'Categorys/*.{h,m}'
 s.public_header_files = 'Categorys/*.h'
 s.frameworks = 'Foundation', 'UIKit'

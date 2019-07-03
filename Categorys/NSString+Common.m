@@ -7,7 +7,6 @@
 //
 
 #import "NSString+Common.h"
-#import "KCPinyinHelper.h"
 
 @implementation NSString (Common)
 
@@ -174,28 +173,6 @@
         return @"";
     }
     
-}
-
-//获取中文首字母
-+ (NSString *)pinyinSpell:(NSString *)str {
-    NSString *spellName = @"";
-    for(int i=0; i < str.length; i++){
-        char ch = pinyinFirstLetter([str characterAtIndex:i]);
-        spellName = [NSString stringWithFormat:@"%@%c",spellName, ch];
-    }
-    if ([NSString isBlankString:spellName]) {
-        spellName = @"###";
-    }
-    return spellName;
-}
-
-//获取中文全拼
-+ (NSString *)pinyinFullSpell:(NSString *)str {
-    NSString *spellName = [KCPinyinHelper pinyinFromChiniseString:str];
-    if ([NSString isBlankString:spellName]) {
-        spellName = @"###";
-    }
-    return spellName;
 }
 
 + (NSInteger)getIDCardSex:(NSString *)card {
