@@ -48,9 +48,9 @@
 /**
  *  根据宽度、字体大小获取字符串高度
  *
- *  @param width
- *  @param font
- *  @return
+ *  @param width 宽度
+ *  @param font 字体
+ *  @return 高度
  */
 + (CGFloat)heightByWidth:(CGFloat)width andFont:(UIFont *)font andLineSpacing:(CGFloat)spacing content:(NSString *)content;
 
@@ -93,10 +93,19 @@
  */
 + (NSMutableDictionary *)getURLParameters:(NSString *)urlStr;
 
+//
+
+/**
+ 创建uuid号
+
+ @return uuid
+ */
++(NSString *)createNewUUID;
+
 /**
  判断是否是纯汉字
  
- @return
+ @return boolValue
  */
 - (BOOL)isChinese;
 
@@ -104,25 +113,25 @@
 /**
  判断是否含有汉字
  
- @return
+ @return boolValue
  */
 - (BOOL)includeChinese;
 
 
 /**
  判断纯数字
-
- @param string
- @return
+ 
+ @return boolValue
  */
 - (BOOL)isNumber;
 
 /**
  返回富文本----用于设置行间距
 
- @param lineSpacing
- @param width
- @param lineHeight 单行最大高度，可以传font.lineHeight
+ @param lineSpacing 行间距
+ @param width 宽度
+ @param font 字体
+ @return 富文本
  */
 - (NSMutableAttributedString *)getByLineSpacing:(NSInteger)lineSpacing width:(CGFloat)width font:(UIFont*)font;
 
@@ -130,25 +139,25 @@
  返回富文本
 
  @param lineSpacing 行间距
- @param font
- @return
+ @param font 字体
+ @return 富文本
  */
 - (NSMutableAttributedString *)getByLineSpacing:(CGFloat)lineSpacing font:(UIFont *)font;
 
 /**
  转换成富文本
  （支持html字符串转换）
- <html><font color=\"#333333\">合理用药系统警告等级<font color=\"#ff8831\">【4】。</font>药品之间存在配伍禁忌问题</font></html>
+ <html><font color='#333333'>合理用药系统警告等级<font color='#ff8831'>【4】。</font>药品之间存在配伍禁忌问题</font></html>
  @param linespacing 行间距
- @return
+ @return 富文本
  */
 - (NSMutableAttributedString *)getAttrStrWithLineSpacing:(CGFloat)linespacing;
 
 /**
  递归计算符合规定的文本长度
 
- @param maxLenth
- @return
+ @param maxLenth 最大长度
+ @return 字符串
  */
 - (NSString *)cutBeyondTextInLength:(NSInteger)maxLenth;
 - (NSUInteger)utf8Length;

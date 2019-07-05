@@ -5,7 +5,7 @@
 //  Copyright (c) 2013 Molon. All rights reserved.
 //
 
-#import "UIView+convenience.h"
+#import "UIView+Convenience.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation UIView (Convenience)

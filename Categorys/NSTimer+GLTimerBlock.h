@@ -19,6 +19,6 @@
  @return            NSTimer
  */
 + (NSTimer *)timer_scheduledTimerWithTimeInterval:(NSTimeInterval)interval
-                                            block:(void(^)())block
+                                            block:(void(^)(void))block
                                           repeats:(BOOL)repeats;
 @end

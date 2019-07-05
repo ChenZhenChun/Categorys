@@ -36,34 +36,34 @@
 /**
  *  正则@ @昵称
  *
- *  @return
+ *  @return 正则
  */
 + (NSRegularExpression *)regexAt;
 /**
  *  正则话题 #这是话题#
  *
- *  @return
+ *  @return 正则
  */
 + (NSRegularExpression *)regexTopic;
 
 /**
  *  正则email
  *
- *  @return
+ *  @return 正则
  */
 + (NSRegularExpression *)regexEmail;
 
 /**
  *  正则URL
  *
- *  @return
+ *  @return 正则
  */
 + (NSRegularExpression *)regexUrl;
 + (NSRegularExpression *)regexPhoneNumber;
 /**
  *  正则 微博表情
  *
- *  @return
+ *  @return 正则
  */
 + (NSRegularExpression *)regexEmoticon;
 @end

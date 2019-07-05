@@ -13,7 +13,7 @@
  性别编码转中文
  
  @param sexCode 0：未知；1：男；2：女
- @return
+ @return 翻译后的字符串
  */
 + (NSString *)gl_sexNameByCode:(id)sexCode;
 @end

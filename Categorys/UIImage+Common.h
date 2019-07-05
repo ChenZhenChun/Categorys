@@ -15,10 +15,7 @@
 
 /**
  *  将图片修改成灰色
- *
- *  @param sourceImage 原图片
- *
- *  @return
+ *  @return image
  */
 - (UIImage *)renderingModeAlwaysTemplate;
 
@@ -45,7 +42,7 @@
  压缩图片
  
  @param size 压缩尺寸
- @return
+ @return image
  */
 - (UIImage *)glOriginCompressScaleToSize:(CGSize)size;
 

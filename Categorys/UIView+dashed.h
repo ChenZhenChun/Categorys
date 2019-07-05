@@ -14,8 +14,8 @@
 /**
  绘制渐变图层
  startPoint&endPoint 颜色渐变的方向，范围在(0,0)与(1,1)之间，如(0,0)(1,0)代表水平方向渐变,(0,0)(0,1)代表竖直方向渐变
- @param startColor
- @param endColor
+ @param startColor 开始的颜色
+ @param endColor 结束的颜色
  @param startPoint 开始的位置
  @param endPoint 结束的位置
  @param cornerRadius 圆角半径
@@ -30,11 +30,11 @@
  绘制渐变图层
 
  startPoint&endPoint 颜色渐变的方向，范围在(0,0)与(1,1)之间，如(0,0)(1,0)代表水平方向渐变,(0,0)(0,1)代表竖直方向渐变
- @param startColor
- @param endColor
+ @param startColor 开始颜色
+ @param endColor 结束颜色
  @param startPoint 开始的位置
  @param endPoint 结束的位置
- @param frame
+ @param frame 位置
  @param cornerRadius 圆角半径
  */
 - (void)gradientStartColor:(UIColor *)startColor
@@ -47,7 +47,7 @@
 /**
  周边模糊渐变
 
- @param fadeLength 
+ @param fadeLength  模糊长度
  */
 - (void)applyGradientMaskForFadeLength:(CGFloat)fadeLength;
 

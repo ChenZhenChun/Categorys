@@ -204,9 +204,9 @@
     if (timeInterval < D_MINUTE) {
         return @"1分钟内";
     } else if (timeInterval < D_HOUR) {//1小时内
-        return [NSString stringWithFormat:@"%ld分钟前", timeInterval / 60];
+        return [NSString stringWithFormat:@"%ld分钟前", (long)(timeInterval / 60)];
     } else if (timeInterval < 21600) {//6小时内
-        return [NSString stringWithFormat:@"%ld小时前", timeInterval / 3600];
+        return [NSString stringWithFormat:@"%ld小时前", (long)(timeInterval / 3600)];
     } else if ([theDay isEqualToString:currentDay]) {//当天
         [dateFormatter setDateFormat:@"HH:mm"];
         return [NSString stringWithFormat:@"今天 %@", [dateFormatter stringFromDate:self]];

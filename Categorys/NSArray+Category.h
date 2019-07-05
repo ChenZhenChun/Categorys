@@ -14,7 +14,7 @@
  *
  *  @param index 索引
  *
- *  @return
+ *  @return obje
  */
 - (id)objectAtIndexCheck:(NSInteger)index;
 
@@ -23,7 +23,7 @@
  
  @param startDate 开始时间  yyyy-MM-dd
  @param endDate 结束时间 yyyy-MM-dd
- @return
+ @return NSArray
  */
 + (NSArray*)getDatesWithStartDate:(NSString *)startDate endDate:(NSString *)endDate;
 @end

@@ -24,7 +24,7 @@
  @param colors 颜色数组
  @param size 大小
  @param gradientType 0：从上到下 1：从左到右 2：左上到右下 3：右上到左下
- @return
+ @return image
  */
 + (UIImage*)imageFromColors:(NSArray *)colors size:(CGSize)size ByGradientType:(NSInteger)gradientType;
 @end

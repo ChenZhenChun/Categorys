@@ -49,8 +49,8 @@
 /**
  timesStamp2-timesStamp1
 
- @param timesStamp1
- @param timesStamp2
+ @param timesStamp1 时间戳1
+ @param timesStamp2 时间戳2
  @return 相差的秒数
  */
 + (double)componentsTimesStamp:(double)timesStamp1 toTimeStamp:(double)timesStamp2;
@@ -58,11 +58,11 @@
 /**
  两个日期的大小比较（toDateStr - fromDateStr）
 
- @param fromDateStr
- @param toDateStr
+ @param fromDateStr from时间
+ @param toDateStr to时间
  @param format 日期格式
  @param calendarUnit 需要计算的单位
- @return
+ @return 比较结果
  */
 + (NSDateComponents *)componentsFromDate:(NSString *)fromDateStr
                                   toDate:(NSString *)toDateStr

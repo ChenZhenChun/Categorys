@@ -355,6 +355,15 @@
     return [dateFmt stringFromDate:date];
 }
 
+//创建uuid号
++(NSString *)createNewUUID {
+    CFUUIDRef    uuidObj = CFUUIDCreate(nil);//create a new UUID
+    NSString    *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuidObj);
+    CFRelease(uuidObj);
+    //uuidString= [uuidString stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    return uuidString;
+}
+
 //纯汉字
 - (BOOL)isChinese {
     NSString *match = @"(^[\u4e00-\u9fa5]+$)";
