@@ -11,6 +11,7 @@
  * @brief NSString 的能用扩展
  */
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface NSString (Common)
 
