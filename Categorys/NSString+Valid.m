@@ -21,35 +21,38 @@
 - (BOOL)isValidPhoneNumber {
     /**
      * 手机号码
-     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188,183
-     * 联通：130,131,132,152,155,166,156,185,186
-     * 电信：133,1349,153,180,189,199
+     * 移动：134[0-8],135,136,137,138,139,147,150,151,152,157,158,159,172,178,182,183,184,187,188,198
+     * 联通：130,131,132,145,152,155,156,166,171,175,176,185,186
+     * 电信：133,1349,149,153,173,177,180,181,189,191,199
      */
-    NSString *mobile = @"^1(3[0-9]|5[0-35-9]|66|8[0235-9]|99)\\d{8}$";
-    /**
-     10         * 中国移动：China Mobile
-     11         * 134[0-8],135,136,137,138,139,147,150,151,157,158,159,170,178,182,183,184,187,188,
-     12         */
-    NSString *chinaMobile = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[23478]|47|70|78)\\d)\\d{7}$";
-    /**
-     15         * 中国联通：China Unicom
-     16         * 130,131,132,152,155,156,166,185,186
-     17         */
-    NSString * chinaUnicom = @"^1(3[0-2]|5[256]|66|8[56]|45|76)\\d{8}$";
-    /**
-     20         * 中国电信：China Telecom
-     21         * 133,1349,153,177,180,181,189,199
-     22         */
-    NSString * chinaTelecom = @"^1((33|53|77|8[019]|99)[0-9]|349)\\d{7}$";
+    NSString *mobile = @"^1(3[0-9]|4[579]|5[0-35-9]|66|7[1-35-8]|8[0-9]|9[189])\\d{8}$";
+    
+//    /**
+//     10         * 中国移动：China Mobile
+//     11         * 134[0-8],135,136,137,138,139,147,150,151,152,157,158,159,172,178,182,183,184,187,188,198
+//     12         */
+//    NSString *chinaMobile = @"^1(34[0-8]|(3[5-9]|47|5[0127-9]|72|78|8[23478]|98)\\d)\\d{7}$";
+//    /**
+//     15         * 中国联通：China Unicom
+//     16         * 130,131,132,145,152,155,156,166,171,175,176,185,186
+//     17         */
+//    NSString * chinaUnicom = @"^1(3[0-2]|45|5[256]|66|7[156]|8[56])\\d{8}$";
+//    /**
+//     20         * 中国电信：China Telecom
+//     21         * 133,1349,149,153,173,177,180,181,189,191,199
+//     22         */
+//    NSString * chinaTelecom = @"^1((33|49|53|73|77|8[019]|91|99)[0-9]|349)\\d{7}$";
     
     NSPredicate *mobilePredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", mobile];
-    NSPredicate *cmPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", chinaMobile];
-    NSPredicate *cuPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", chinaUnicom];
-    NSPredicate *ctPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", chinaTelecom];
-    if ([mobilePredicate evaluateWithObject:self]
-        || [cmPredicate evaluateWithObject:self]
-        || [cuPredicate evaluateWithObject:self]
-        || [ctPredicate evaluateWithObject:self]) {
+//    NSPredicate *cmPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", chinaMobile];
+//    NSPredicate *cuPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", chinaUnicom];
+//    NSPredicate *ctPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", chinaTelecom];
+    if (
+        [mobilePredicate evaluateWithObject:self]
+//        [cmPredicate evaluateWithObject:self] ||
+//        [cuPredicate evaluateWithObject:self]||
+//        [ctPredicate evaluateWithObject:self]
+        ) {
         return YES;
     }
     
