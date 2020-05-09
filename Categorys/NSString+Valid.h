@@ -24,6 +24,8 @@
 
 //验证密码格式（6-16位数字或字母）
 + (BOOL)validatePassword:(NSString *)passWord;
+//验证密码格式（6-16位数字和字母组合）
++ (BOOL)validatePasswordNumAndLetter:(NSString *)passWord;
 
 //只能输入0和非0打头的数字
 + (BOOL)isIntergerNumber:(NSString *)number;

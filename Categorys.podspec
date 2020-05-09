@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 s.name              = "Categorys"
 
 #更新代码必须修改版本号
-s.version           = "1.0.6"
+s.version           = "1.0.7"
 s.summary           = "It is a Categorys used on iOS, which implement by Objective-C"
 s.description       = <<-DESC
 It is a Categorys used on iOS, which implement by Objective-C.
@@ -18,7 +18,7 @@ s.platform          = :ios, '7.0'
 s.requires_arc = true
 
 #source_files路径是相对podspec文件的路径
-s.dependency 'MBProgressHUD','0.9.2'
+s.dependency 'MBProgressHUD', '0.9.2'
 s.source_files = 'Categorys/*.{h,m}'
 s.public_header_files = 'Categorys/*.h'
 s.frameworks = 'Foundation', 'UIKit'

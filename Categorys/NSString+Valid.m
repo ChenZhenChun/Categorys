@@ -183,9 +183,15 @@
 
 #pragma mark - NSRegularExpression正则
 //验证密码格式（6-16位数字或字母）
-+ (BOOL)validatePassword:(NSString *)passWord
-{
++ (BOOL)validatePassword:(NSString *)passWord {
     NSString *passWordRegex = @"^[a-zA-Z0-9]{6,16}+$";
+    NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",passWordRegex];
+    return [passWordPredicate evaluateWithObject:passWord];
+}
+
+//验证密码格式（6-16位数字和字母组合）
++ (BOOL)validatePasswordNumAndLetter:(NSString *)passWord {
+    NSString *passWordRegex = @"^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9]{6,16}$";
     NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",passWordRegex];
     return [passWordPredicate evaluateWithObject:passWord];
 }
