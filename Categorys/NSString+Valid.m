@@ -196,6 +196,13 @@
     return [passWordPredicate evaluateWithObject:passWord];
 }
 
++ (BOOL)validatePasswordLevel3:(NSString *)passWord {
+//    (?=^.{8,}$)(?=.*\d)(?=.*\W+)(?=.*[A-Z])(?=.*[a-z])(?!.*\n).*$   密码(由数字/大写字母/小写字母/标点符号组成，四种都必有，8位以上)
+    NSString *passWordRegex = @"(?=^.{8,16}$)(?=.*\\d)(?=.*\\W+)(?=.*[a-zA-Z]).*$";
+    NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",passWordRegex];
+    return [passWordPredicate evaluateWithObject:passWord];
+}
+
 //只能输入0和非0打头的数字
 + (BOOL)isIntergerNumber:(NSString *)number {
     NSString * regex = @"^(0|[1-9][0-9]*)$";
