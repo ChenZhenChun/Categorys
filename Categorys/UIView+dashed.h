@@ -62,4 +62,9 @@
 
 - (void)drawLineOfDashByCAShapeLayerWithLineLength:(int)lineLength lineSpacing:(int)lineSpacing lineColor:(UIColor *)lineColor;
 
+/**
+ *  设置mask图像，mask.frame自动矫正为self.frame
+ */
+- (void)setMaskWithImage:(UIImage*)image;
+
 @end

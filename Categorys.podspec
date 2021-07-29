@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 s.name              = "Categorys"
 
 #更新代码必须修改版本号
-s.version           = "1.0.8"
+s.version           = "1.0.9"
 s.summary           = "It is a Categorys used on iOS, which implement by Objective-C"
 s.description       = <<-DESC
 It is a Categorys used on iOS, which implement by Objective-C.

@@ -7,8 +7,47 @@
 //
 
 #import "UIView+dashed.h"
+#import <objc/runtime.h>
+
+NSString  *const kIsUseSetMaskWithImageKey = @"MLCALayer__SetMaskWithImage__isUseSetMaskWithImage";
+
+@interface CALayer (SetMaskWithImage)
+//给CALayer添加个标识是否使用UIView的SetMaskWithImage功能设置的mask
+@property (nonatomic,strong) NSNumber *isUseSetMaskWithImage;
+
+@end
+
+IB_DESIGNABLE
+
+@implementation CALayer (SetMaskWithImage)
+
+#pragma mark -  add isUseSetMaskWithImage property
+- (void)setIsUseSetMaskWithImage:(NSNumber*)isUseSetMaskWithImage{
+    [self willChangeValueForKey:kIsUseSetMaskWithImageKey];
+    objc_setAssociatedObject(self, &kIsUseSetMaskWithImageKey, isUseSetMaskWithImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self didChangeValueForKey:kIsUseSetMaskWithImageKey];
+}
+
+- (NSNumber*)isUseSetMaskWithImage{
+    return objc_getAssociatedObject(self, &kIsUseSetMaskWithImageKey);
+}
+#pragma mark - hook setMask
+- (void)setMask__hook:(CALayer *)mask
+{
+    [self setMask__hook:mask];
+    
+    self.isUseSetMaskWithImage = @(NO);
+}
+
+@end
 
 @implementation UIView (dashed)
+
+
+inline static CGRect CGRectCenterRectForResizableImage(UIImage *image) {
+    return CGRectMake(image.capInsets.left/image.size.width, image.capInsets.top/image.size.height, (image.size.width-image.capInsets.right-image.capInsets.left)/image.size.width, (image.size.height-image.capInsets.bottom-image.capInsets.top)/image.size.height);
+}
+
 
 - (void)gradientStartColor:(UIColor *)startColor
                   endColor:(UIColor *)endColor
@@ -118,5 +157,62 @@
     //  把绘制好的虚线添加上来
     [self.layer addSublayer:shapeLayer];
 }
+
+
+- (void)setMaskWithImage:(UIImage*)image{
+    //需要先hook view的setFrame:,用来能同步设置mask的frame
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        //这个在整个app的生命周期，只需要替换一次。
+        Swizzle([UIView class], NSSelectorFromString(@"setFrame:"), @selector(setFrame__hook:));
+        Swizzle([CALayer class], NSSelectorFromString(@"setMask:"), @selector(setMask__hook:));
+    });
+    //根据
+    CALayer *mask = [CALayer layer];
+    mask.contents = (id)image.CGImage;
+    mask.contentsScale = [UIScreen mainScreen].scale;
+    //设置拉伸属性，根据capInsets，找到可拉伸的矩形
+    CGRect capRect = CGRectCenterRectForResizableImage(image);
+    mask.contentsCenter = capRect;
+    mask.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    self.layer.mask = mask;
+    self.layer.isUseSetMaskWithImage = @(YES);
+}
+
+- (void)setFrame__hook:(CGRect)frame{
+    [self setFrame__hook:frame];
+    //这里只有当前对象使用过setMaskWithImage方法后才会同步修正mask的frame，否则不修正
+    //没办法，因为用了objcruntime，所以需要尽量的去防止意外情况。
+    if(self.layer.mask&&self.layer.isUseSetMaskWithImage&&[self.layer.isUseSetMaskWithImage boolValue]){
+        self.layer.mask.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    }
+}
+
+//静态就交换静态，实例方法就交换实例方法
+void Swizzle(Class c, SEL origSEL, SEL newSEL) {
+    //获取实例方法
+    Method origMethod = class_getInstanceMethod(c, origSEL);
+    Method newMethod = nil;
+    if (!origMethod) {
+        //获取静态方法
+        origMethod = class_getClassMethod(c, origSEL);
+        newMethod = class_getClassMethod(c, newSEL);
+    }else{
+        newMethod = class_getInstanceMethod(c, newSEL);
+    }
+    
+    if (!origMethod||!newMethod) {
+        return;
+    }
+    
+    //自身已经有了就添加不成功，直接交换即可
+    if(class_addMethod(c, origSEL, method_getImplementation(newMethod), method_getTypeEncoding(newMethod))){
+        //添加成功一般情况是因为，origSEL本身是在c的父类里。这里添加成功了一个继承方法。
+        class_replaceMethod(c, newSEL, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
+    }else{
+        method_exchangeImplementations(origMethod, newMethod);
+    }
+}
+
 
 @end
