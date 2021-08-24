@@ -23,114 +23,148 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 }
 
 - (void)hud_showHudInView:(UIView *)view hint:(NSString *)hint{
-    
-    MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
-    if (!hud) {
-        hud = [[MBProgressHUD alloc] initWithView:view];
-    }
-    hud.removeFromSuperViewOnHide = YES;
-    [view addSubview:hud];
-    hud.labelText = hint;
-//    hud.customView = [self gifImageView:hint];
-//    hud.mode = MBProgressHUDModeCustomView;
-//    hud.color = [UIColor clearColor];
-    
-    [hud show:YES];
-    [self setHUD:hud];
-}
-
-- (void)hud_showHudInView:(UIView *)view {
-    MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
-    if (!hud) {
-        hud = [[MBProgressHUD alloc] initWithView:view];
-    }
-    hud.removeFromSuperViewOnHide = YES;
-    [view addSubview:hud];
-//    HUD.labelText = hint;
-//    hud.customView = [self gifImageView:nil];
-//    hud.mode = MBProgressHUDModeCustomView;
-//    hud.color = [UIColor clearColor];
-    
-    [hud show:YES];
-    [self setHUD:hud];
-}
-
-- (void)hud_showProgressHudInView:(UIView *)view progress:(CGFloat)progress  {
-    @try {
+    dispatch_async(dispatch_get_main_queue(), ^{
         MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
         if (!hud) {
             hud = [[MBProgressHUD alloc] initWithView:view];
         }
         hud.removeFromSuperViewOnHide = YES;
         [view addSubview:hud];
-        hud.labelText = @"上传中";
-        hud.mode = MBProgressHUDModeAnnularDeterminate;
-        hud.progress = progress;
+        hud.labelText = hint;
+    //    hud.customView = [self gifImageView:hint];
+    //    hud.mode = MBProgressHUDModeCustomView;
+    //    hud.color = [UIColor clearColor];
+        
         [hud show:YES];
         [self setHUD:hud];
-        if (progress==1) {
-            hud.labelText = nil;
-            hud.detailsLabelText = nil;
-            [self hud_showHudInView:view];
+    });
+    
+}
+
+- (void)hud_showHudInView:(UIView *)view {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
+        if (!hud) {
+            hud = [[MBProgressHUD alloc] initWithView:view];
         }
-    }@catch (NSException *exception) {
+        hud.removeFromSuperViewOnHide = YES;
+        [view addSubview:hud];
+    //    HUD.labelText = hint;
+    //    hud.customView = [self gifImageView:nil];
+    //    hud.mode = MBProgressHUDModeCustomView;
+    //    hud.color = [UIColor clearColor];
         
-    }
+        [hud show:YES];
+        [self setHUD:hud];
+    });
+}
+
+- (void)hud_showProgressHudInView:(UIView *)view progress:(CGFloat)progress  {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        @try {
+            MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
+            if (!hud) {
+                hud = [[MBProgressHUD alloc] initWithView:view];
+            }
+            hud.removeFromSuperViewOnHide = YES;
+            [view addSubview:hud];
+            hud.labelText = @"上传中";
+            hud.mode = MBProgressHUDModeAnnularDeterminate;
+            hud.progress = progress;
+            [hud show:YES];
+            [self setHUD:hud];
+            if (progress==1) {
+                hud.labelText = nil;
+                hud.detailsLabelText = nil;
+                [self hud_showHudInView:view];
+            }
+        }@catch (NSException *exception) {
+            
+        }
+    });
 }
 
 - (void)hud_showProgress:(CGFloat)progress {
-    UIView *view = [[UIApplication sharedApplication].delegate window];
-    [self hud_showProgressHudInView:view progress:progress];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView *view = [[UIApplication sharedApplication].delegate window];
+        [self hud_showProgressHudInView:view progress:progress];
+    });
 }
 
 - (void)hud_modifyText:(NSString *)text detaiText:(NSString *)detailText {
-    UIView *view = [[UIApplication sharedApplication].delegate window];
-    MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
-    if (!hud) return;
-    if (text) hud.labelText = text;
-    if (detailText) hud.detailsLabelText = detailText;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView *view = [[UIApplication sharedApplication].delegate window];
+        MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
+        if (!hud) return;
+        if (text) hud.labelText = text;
+        if (detailText) hud.detailsLabelText = detailText;
+    });
+    
 }
 
 - (void)hud_showHintTip:(NSString *)hint {
-    //显示提示信息
-    UIView *view = [[UIApplication sharedApplication].delegate window];
-    MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
-    if (!hud) {
-        hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //显示提示信息
+        [self hud_showHintTip:hint afterDelay:1];
+    });
+}
 
-    hud.userInteractionEnabled = NO;
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-happy.png"]];
-    hud.mode = MBProgressHUDModeCustomView;
-    hud.detailsLabelText = hint;
-    hud.removeFromSuperViewOnHide = YES;
-    
-    [hud hide:YES afterDelay:1];
+- (void)hud_showHintTip:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //显示提示信息
+        UIView *view = [[UIApplication sharedApplication].delegate window];
+        MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
+        if (!hud) {
+            hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        }
+
+        hud.userInteractionEnabled = NO;
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-happy.png"]];
+        hud.mode = MBProgressHUDModeCustomView;
+        hud.detailsLabelText = hint;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:afterDelay];
+    });
 }
 
 - (void)hud_showHintError:(NSString *)hint {
-    //显示提示信息
-    UIView *view = [[UIApplication sharedApplication].delegate window];
-    MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
-    if (!hud) {
-        hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    }
-    hud.userInteractionEnabled = NO;
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-sad.png"]];
-    hud.mode = MBProgressHUDModeCustomView;
-    hud.detailsLabelText = hint;
-    hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:1];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //显示提示信息
+        [self hud_showHintTip:hint afterDelay:1];
+    });
+}
+
+- (void)hud_showHintError:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //显示提示信息
+        UIView *view = [[UIApplication sharedApplication].delegate window];
+        MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
+        if (!hud) {
+            hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        }
+        hud.userInteractionEnabled = NO;
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-sad.png"]];
+        hud.mode = MBProgressHUDModeCustomView;
+        hud.detailsLabelText = hint;
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:YES afterDelay:afterDelay];
+    });
 }
 
 
 
 - (void)hud_hide {
-    [[self HUD] hide:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self HUD] hide:YES];
+    });
+    
 }
 
 - (void)hud_hideHudAfterDelay:(NSTimeInterval)delay {
-    [[self HUD] hide:YES afterDelay:delay];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self HUD] hide:YES afterDelay:delay];
+    });
 }
 
 
