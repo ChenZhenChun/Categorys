@@ -103,10 +103,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 }
 
 - (void)hud_showHintTip:(NSString *)hint {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //显示提示信息
-        [self hud_showHintTip:hint afterDelay:1];
-    });
+    [self hud_showHintTip:hint afterDelay:1];
 }
 
 - (void)hud_showHintTip:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay {
@@ -129,10 +126,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 }
 
 - (void)hud_showHintError:(NSString *)hint {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //显示提示信息
-        [self hud_showHintTip:hint afterDelay:1];
-    });
+    [self hud_showHintTip:hint afterDelay:1];
 }
 
 - (void)hud_showHintError:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay {
