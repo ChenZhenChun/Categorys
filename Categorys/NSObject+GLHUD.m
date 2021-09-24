@@ -116,7 +116,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
         }
 
         hud.userInteractionEnabled = NO;
-        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-happy.png"]];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-happy" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.detailsLabelText = hint;
         hud.removeFromSuperViewOnHide = YES;
@@ -126,7 +126,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 }
 
 - (void)hud_showHintError:(NSString *)hint {
-    [self hud_showHintTip:hint afterDelay:1];
+    [self hud_showHintError:hint afterDelay:1];
 }
 
 - (void)hud_showHintError:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay {
@@ -138,7 +138,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
             hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
         }
         hud.userInteractionEnabled = NO;
-        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-sad.png"]];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-sad" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.detailsLabelText = hint;
         hud.removeFromSuperViewOnHide = YES;
