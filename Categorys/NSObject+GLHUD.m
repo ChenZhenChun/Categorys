@@ -116,7 +116,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
         }
 
         hud.userInteractionEnabled = NO;
-        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-happy" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-happy.png"]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.detailsLabelText = hint;
         hud.removeFromSuperViewOnHide = YES;
@@ -138,7 +138,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
             hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
         }
         hud.userInteractionEnabled = NO;
-        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-sad" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-sad.png"]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.detailsLabelText = hint;
         hud.removeFromSuperViewOnHide = YES;

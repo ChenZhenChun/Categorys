@@ -242,7 +242,8 @@
         if (data) {
             return [UIImage gl_animatedGIFWithData:data];
         }
-        return [UIImage imageNamed:name inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+        
+        return [UIImage imageNamed:name];
     }
     else {
         NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"gif"];
@@ -253,7 +254,7 @@
             return [UIImage gl_animatedGIFWithData:data];
         }
         
-        return [UIImage imageNamed:name inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+        return [UIImage imageNamed:name];
     }
 }
 
