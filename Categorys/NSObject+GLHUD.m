@@ -114,7 +114,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
         if (!hud) {
             hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
         }
-
+        hud.layer.zPosition = MAXFLOAT;
         hud.userInteractionEnabled = NO;
         hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-happy.png"]];
         hud.mode = MBProgressHUDModeCustomView;
@@ -137,6 +137,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
         if (!hud) {
             hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
         }
+        hud.layer.zPosition = MAXFLOAT;
         hud.userInteractionEnabled = NO;
         hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-sad.png"]];
         hud.mode = MBProgressHUDModeCustomView;
