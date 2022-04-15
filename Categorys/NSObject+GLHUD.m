@@ -103,16 +103,23 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 }
 
 - (void)hud_showHintTip:(NSString *)hint {
-    [self hud_showHintTip:hint afterDelay:1];
+    [self hud_showHintTip:hint afterDelay:1 inView:nil];
 }
 
-- (void)hud_showHintTip:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay {
+- (void)hud_showHintTip:(NSString *)hint inView:(UIView *)view {
+    [self hud_showHintTip:hint afterDelay:1 inView:view];
+}
+
+- (void)hud_showHintTip:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay inView:(UIView *)view {
     dispatch_async(dispatch_get_main_queue(), ^{
         //显示提示信息
-        UIView *view = [[UIApplication sharedApplication].delegate window];
-        MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
+        UIView *contentView = view;
+        if (!contentView) {
+            contentView = [[UIApplication sharedApplication].delegate window];
+        }
+        MBProgressHUD *hud = [MBProgressHUD HUDForView:contentView];
         if (!hud) {
-            hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+            hud = [MBProgressHUD showHUDAddedTo:contentView animated:YES];
         }
         hud.layer.zPosition = MAXFLOAT;
         hud.userInteractionEnabled = NO;
@@ -126,16 +133,23 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 }
 
 - (void)hud_showHintError:(NSString *)hint {
-    [self hud_showHintError:hint afterDelay:1];
+    [self hud_showHintError:hint afterDelay:1 inView:nil];
 }
 
-- (void)hud_showHintError:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay {
+- (void)hud_showHintError:(NSString *)hint inView:(UIView *)view {
+    [self hud_showHintError:hint afterDelay:1 inView:view];
+}
+
+- (void)hud_showHintError:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay inView:(UIView *)view {
     dispatch_async(dispatch_get_main_queue(), ^{
         //显示提示信息
-        UIView *view = [[UIApplication sharedApplication].delegate window];
+        UIView *contentView = view;
+        if (!contentView) {
+            contentView = [[UIApplication sharedApplication].delegate window];
+        }
         MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
         if (!hud) {
-            hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+            hud = [MBProgressHUD showHUDAddedTo:contentView animated:YES];
         }
         hud.layer.zPosition = MAXFLOAT;
         hud.userInteractionEnabled = NO;

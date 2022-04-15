@@ -20,10 +20,14 @@
 - (void)hud_hideHudAfterDelay:(NSTimeInterval)delay;
 
 - (void)hud_showHintTip:(NSString *)hint;
+- (void)hud_showHintTip:(NSString *)hint inView:(UIView *)view;
 - (void)hud_showHintTip:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay;
+- (void)hud_showHintTip:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay inView:(UIView *)view;
 
 - (void)hud_showHintError:(NSString *)hint;
+- (void)hud_showHintError:(NSString *)hint inView:(UIView *)view;
 - (void)hud_showHintError:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay;
+- (void)hud_showHintError:(NSString *)hint afterDelay:(NSTimeInterval)afterDelay inView:(UIView *)view;
 
 - (void)hud_showHintErrorByLocalizedString:(int)code;
 @end
