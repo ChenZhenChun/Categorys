@@ -63,13 +63,22 @@
 
 
 //生成uuid
-+ (NSString *)createUUID
-{
++ (NSString *)createUUID {
     CFUUIDRef uuidObject = CFUUIDCreate(kCFAllocatorDefault);
     NSString *uuidStr = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuidObject));
     CFRelease(uuidObject);
     return uuidStr;
 }
+
+//创建uuid号
++ (NSString *)createNewUUID {
+    CFUUIDRef    uuidObj = CFUUIDCreate(nil);//create a new UUID
+    NSString    *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuidObj);
+    CFRelease(uuidObj);
+    //uuidString= [uuidString stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    return uuidString;
+}
+
 + (NSMutableAttributedString *)textStr:(NSString *)str withChangeColorStr:(NSString *)rangeStr forColor:(UIColor *)color withFontSize:(NSInteger)size {
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:str];
     //[attributeStr addAttribute:NSForegroundColorAttributeName value:color range:[str rangeOfString:rangeStr]];
@@ -83,8 +92,7 @@
 }
 
 //对象转json字符串
-+ (NSString*)DataTOjsonString:(id)object
-{
++ (NSString*)DataTOjsonString:(id)object {
     NSString *jsonString = @"";
     NSError *error;
     if (object == nil || object == [NSNull null]) {
@@ -101,9 +109,22 @@
     return jsonString;
 }
 
+
+/// 从html字符串中抽取纯中文文本
+/// @param htmlString htmlString description
++ (NSString *)getStringWithHtmlString:(NSString *)htmlString {
+    if ([NSString isBlankString:htmlString]) {
+        return htmlString;
+    }
+    NSRegularExpression *regularExpretion = [NSRegularExpression regularExpressionWithPattern:@"<[^>]*>|\n"
+                                                                                    options:0
+                                                                                      error:nil];
+    htmlString = [regularExpretion stringByReplacingMatchesInString:htmlString options:NSMatchingReportProgress range:NSMakeRange(0, htmlString.length) withTemplate:@""];//替换所有html标签和换行匹配元素为空字符串
+    return htmlString;
+}
+
 //从字符串中获取数字
-+(NSString *)getTheNumberInTheString:(NSString *)string
-{
++ (NSString *)getTheNumberInTheString:(NSString *)string {
     return  [[string componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""];
     
 }
@@ -353,15 +374,6 @@
     NSDate *date = [dateFmt dateFromString:dateStr];
     dateFmt.dateFormat = toFormatStr;
     return [dateFmt stringFromDate:date];
-}
-
-//创建uuid号
-+(NSString *)createNewUUID {
-    CFUUIDRef    uuidObj = CFUUIDCreate(nil);//create a new UUID
-    NSString    *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(nil, uuidObj);
-    CFRelease(uuidObj);
-    //uuidString= [uuidString stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    return uuidString;
 }
 
 //纯汉字

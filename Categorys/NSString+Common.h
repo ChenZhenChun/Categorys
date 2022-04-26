@@ -24,6 +24,13 @@
 //生成uuid
 + (NSString *)createUUID;
 
+/**
+ 创建uuid号
+
+ @return uuid
+ */
++(NSString *)createNewUUID;
+
 // 获取缓存路径
 + (NSString *)cachePath;
 
@@ -39,6 +46,10 @@
 
 //对象转json字符串
 + (NSString*)DataTOjsonString:(id)object;
+
+/// 从html字符串中抽取纯中文文本
+/// @param htmlString htmlString description
++ (NSString *)getStringWithHtmlString:(NSString *)htmlString;
 
 //从字符串中获取数字
 + (NSString *)getTheNumberInTheString:(NSString *)string;
@@ -94,22 +105,12 @@
  */
 + (NSMutableDictionary *)getURLParameters:(NSString *)urlStr;
 
-//
-
-/**
- 创建uuid号
-
- @return uuid
- */
-+(NSString *)createNewUUID;
-
 /**
  判断是否是纯汉字
  
  @return boolValue
  */
 - (BOOL)isChinese;
-
 
 /**
  判断是否含有汉字
